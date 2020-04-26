@@ -1,0 +1,29 @@
+https://github.com/globalbioticinteractions/elton
+
+I've created a travis project to automatically generate TPT-GloBI reports at:
+
+https://travis-ci.org/parasitetracker/tpt-reporting
+Currently, list of datasets is limited to yours (see https://github.com/ParasiteTracker/tpt-reporting/blob/master/datasets.tsv ), but more can be added once you review the report formats.
+Note that you can also run this on your own laptop by running https://github.com/ParasiteTracker/tpt-reporting/blob/master/generate-report.sh in the terminal after installing https://github.com/globalbioticinteractions/elton#install .
+
+Curious to hear your thoughts,
+
+
+How to run:
+
+elton update globalbioticinteraction/ucsb-izc
+elton check > ucsb-izc.txt 
+
+elton interactions -c ucsb-izc > interactions.tsv
+
+
+./generate-report.sh | tee report.log
+
+
+zcat review.tsv.gz | tail -n+2 | cut -f15 | jq .context.interactionTypeNameVerbatim | uniq -c
+
+elton review --no-header globalbioticinteractions/ucsb-izc | cut -f15 | jq .context.interactionTypeNameVerbatim | sort | uniq -c
+
+$ elton review --no-header globalbioticinteractions/ucsb-izc | cut -f15 | jq -c '.context | { in: .interactionTypeNameVerbatim, out: .interactionTypeNameVerbatim}' | sort | uniq -c
+
+issue on data publication
