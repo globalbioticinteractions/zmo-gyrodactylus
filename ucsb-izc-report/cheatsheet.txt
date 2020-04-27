@@ -24,6 +24,18 @@ zcat review.tsv.gz | tail -n+2 | cut -f15 | jq .context.interactionTypeNameVerba
 
 elton review --no-header globalbioticinteractions/ucsb-izc | cut -f15 | jq .context.interactionTypeNameVerbatim | sort | uniq -c
 
-$ elton review --no-header globalbioticinteractions/ucsb-izc | cut -f15 | jq -c '.context | { in: .interactionTypeNameVerbatim, out: .interactionTypeNameVerbatim}' | sort | uniq -c
+$ elton review --no-header globalbioticinteractions/ucsb-izc | cut -f15 | jq -c '.context | { in: .interactionTypeNameVerbatim, out: .interactionTypeName, id: .sourceOccurrenceId}' | sort | uniq -c
 
 issue on data publication
+
+MPM
+  16 {"in":"associated with","out":"associated with"}
+ 615 {"in":null,"out":null}
+ 
+1221 {"in":"associated with","out":"interactsWith"}
+   2 {"in":"ex","out":"hasHost"}
+   1 {"in":"inside","out":"interactsWith"}
+  14 {"in":"visits","out":"visits"}
+  23 {"in":"visitsFlowersOf","out":"visitsFlowersOf"}
+   1 {"in":null,"out":"Centromadia parryi subsp. australis"}
+ 386 {"in":null,"out":null}
